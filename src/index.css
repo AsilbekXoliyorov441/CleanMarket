@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper-button-next::after {
+  position: absolute !important;
+  z-index: 1000000 !important;
+  color: rgb(118, 118, 118);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.swiper-button-prev::after {
+  position: absolute !important;
+  z-index: 1000000 !important;
+  color: rgb(118, 118, 118);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.swiper-button-next button {
+  width: 10px;
+  height: 10px;
+}
+
+.swiper-pagination-bullet-active{
+  background-color: black;
+}
