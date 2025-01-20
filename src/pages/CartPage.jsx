@@ -20,7 +20,7 @@ const CartPage = () => {
             >
               <img
                 className="text-headerColor fill-headerColor w-[7px]"
-                src="/public/home/left.svg"
+                src="/home/left.svg"
                 alt="left"
               />
               Ortga

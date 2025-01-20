@@ -127,7 +127,7 @@ const Header = () => {
         <a href="#" className="hidden lg:block">
           <img
             className="w-[62px] lg:w-[62px] "
-            src="/public/home/logo.png"
+            src="/home/logo.png"
             alt="logo"
           />
         </a>
