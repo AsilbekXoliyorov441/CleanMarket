@@ -9,7 +9,7 @@ const CategoriesPage = () => {
     <div className="container flex flex-col sm:flex-row gap-[30px] pt-[30px] pb-[60px]">
       <div className="max-w-[263px] mx-auto ">
         <button
-        onClick={() => navigate(-1)}
+          onClick={() => navigate(-1)}
           className="flex text-headerColor items-center gap-[4px] underline"
         >
           <img
@@ -28,7 +28,9 @@ const CategoriesPage = () => {
         <p className="font-bold mb-[16px]">Категории</p>
         <div className="flex flex-col gap-[10px]">
           <button
-            className="flex items-center w-full justify-between"
+            className={`flex hover:bg-gray-100 rounded-[4px] ${
+              activeTab === 200 ? "bg-slate-300" : ""
+            } h-[40px] p-1 items-center w-full justify-between`}
             onClick={() => setActiveTab(200)}
           >
             <span className="inline-block w-[110px] text-[14px] text-left">
@@ -36,13 +38,15 @@ const CategoriesPage = () => {
             </span>
             <img src="/home/categories-icon.png" alt="" />
           </button>
-          {categories.slice(0, 4).map((tab) => (
+          {categories.slice(0, 4).map((tab, i) => (
             <button
-              className="flex items-center w-full justify-between"
+              className={`hover:bg-gray-100 rounded-[4px] ${
+                tab.id === activeTab ? "bg-gray-300" : ""
+              } h-[40px] p-1 flex items-center w-full justify-between`}
               onClick={() => setActiveTab(tab.id)}
-              key={tab}
+              key={i}
             >
-              <span className="inline-block w-[110px] text-[14px] text-left">
+              <span className="inline-block  w-[110px] text-[14px] text-left">
                 {tab.title}
               </span>
               <img src="/home/categories-icon.png" alt="" />
@@ -60,13 +64,16 @@ const CategoriesPage = () => {
           </p>
         </div>
       </div>
-      <div>
+      <div className="w-full sm:w-[80%]">
         <h1 className="text-[32px] font-bold mb-[40px]">Kategoriyalar</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2  xl:grid-cols-3 gap-[20px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:flex xl:flex-wrap gap-[20px]">
           {activeTab === 200 ? (
             <>
-              {categories.slice(0, 12).map((category) => (
-                <div className="max-w-[350px] w-full  mx-auto border border-gray-100 rounded-[24px] relative overflow-hidden">
+              {categories.slice(0, 12).map((category, i) => (
+                <div
+                  key={i}
+                  className="max-w-[350px] w-full  mx-auto border border-gray-100 rounded-[24px] relative overflow-hidden"
+                >
                   <span className="absolute w-[202px] text-[20px] top-[24px] left-[24px]">
                     {category?.title}
                   </span>
@@ -84,9 +91,12 @@ const CategoriesPage = () => {
             </>
           ) : (
             <>
-              {categories.map((category) =>
+              {categories.map((category, i) =>
                 activeTab === category.id ? (
-                  <div className="max-w-[350px] w-full mx-auto border border-gray-100 rounded-[24px] relative overflow-hidden">
+                  <div
+                    key={i}
+                    className="max-w-[350px] w-full mx-auto border border-gray-100 rounded-[24px] relative overflow-hidden"
+                  >
                     <span className="absolute w-[202px] text-[20px] top-[24px] left-[24px]">
                       {category?.title}
                     </span>

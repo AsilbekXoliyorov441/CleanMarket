@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage"
 import CategoriesPage from './pages/CategoriesPage';
 import ProductsPage from './pages/ProductsPage';
 import CartPage from "./pages/CartPage";
+import AboutPage from './pages/AboutPage';
+import NewsPage from './pages/NewsPage';
 
 
 function App() {
@@ -13,9 +15,10 @@ function App() {
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="categories" element={<CategoriesPage />} />
-          <Route path="products" element={<ProductsPage />}/>
+          <Route path="products" element={<ProductsPage />} />
           <Route path="products/:id" element={<CartPage />} />
-          <Route path="about"></Route>
+          <Route path="about" element={<AboutPage />} />
+          <Route path="news" element={<NewsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

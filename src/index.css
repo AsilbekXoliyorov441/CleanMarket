@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html{
+  scroll-behavior: smooth;
+}
+
 .swiper-button-next::after {
   position: absolute !important;
   z-index: 1000000 !important;
@@ -23,6 +27,42 @@
   height: 10px;
 }
 
-.swiper-pagination-bullet-active{
+.swiper-pagination-bullet-active {
   background-color: black;
+}
+
+#companies .swiper-button-next::after {
+  position: absolute !important;
+  z-index: 1000000 !important;
+  color: rgb(118, 118, 118);
+  font-size: 14px;
+  width: 20px;
+  height: 20px;
+  right: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  font-weight: bold;
+  background-color: white !important;
+  color: rgb(11, 130, 151);
+}
+
+
+
+#companies .swiper-button-prev::after {
+  position: absolute !important;
+  z-index: 1000000 !important;
+  color: rgb(118, 118, 118);
+  font-size: 14px;
+  font-weight: bold;
+    width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: -10px;
+  border-radius: 50px;
+  background-color: white !important;
+  color: rgb(11, 130, 151);
 }

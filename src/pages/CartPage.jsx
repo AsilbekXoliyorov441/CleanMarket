@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../const/products";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,8 +14,13 @@ import { Navigation } from "swiper/modules";
 const CartPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [callback , setCallback] = useState(false)
   const singleProduct = products.filter((product) => product.id == id)[0];
   const [selectImage, setSelectImage] = useState(singleProduct?.image);
+
+  useEffect(() => {
+    setSelectImage(singleProduct.image)
+  } , [id])
 
   return (
     <section id="cart" className="pt-[36px] pb-[60px]">

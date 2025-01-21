@@ -22,6 +22,10 @@ module.exports = {
       },
       colors: {
         headerColor: "rgb(11, 130, 151);",
+        serviceColor1: "#2E2E2E",
+        serviceColorGradient1: "rgb(33, 150, 176)",
+        serviceColorGradient2: "rgb(255, 81, 87)",
+        mapColor: "rgb(2, 71, 66)",
       },
     },
   },

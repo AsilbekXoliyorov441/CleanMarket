@@ -35,11 +35,11 @@ const ProductPage = () => {
             </span>
             <img src="/home/categories-icon.png" alt="" />
           </button>
-          {categories.slice(0, 4).map((tab) => (
+          {categories.slice(0, 4).map((tab , index) => (
             <button
               className="flex items-center w-full justify-between"
               onClick={() => setActiveTab(tab.id)}
-              key={tab}
+              key={index}
             >
               <span className="inline-block w-[110px] text-[14px] text-left">
                 {tab.title}
@@ -64,8 +64,8 @@ const ProductPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2  xl:grid-cols-3 gap-[20px]">
           {activeTab === 200 ? (
             <>
-              {products.map((product) => (
-                <div className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]">
+              {products.map((product , i) => (
+                <div key={i} className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]">
                   {product.discount ? (
                     <span className="absolute w-[55%] bg-white rounded-br-[9.65px] font-bold flex items-center justify-center h-[40px]">
                       {product?.discount}%
@@ -116,8 +116,8 @@ const ProductPage = () => {
             </>
           ) : (
             <>
-              {products.map((product) => activeTab === product?.categoryId ? 
-              <div key={product.id} className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]">
+              {products.map((product , i) => activeTab === product?.categoryId ? 
+              <div key={i} className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]">
                   {product.discount ? (
                     <span className="absolute w-[55%] bg-white rounded-br-[9.65px] font-bold flex items-center justify-center h-[40px]">
                       {product?.discount}%
