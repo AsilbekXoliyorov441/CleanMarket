@@ -6,6 +6,7 @@ import ProductsPage from './pages/ProductsPage';
 import CartPage from "./pages/CartPage";
 import AboutPage from './pages/AboutPage';
 import NewsPage from './pages/NewsPage';
+import NotFoundPage from "./pages/NotFoundPage";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="products/:id" element={<CartPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="news" element={<NewsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

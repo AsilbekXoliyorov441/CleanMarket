@@ -154,9 +154,9 @@ const CartPage = () => {
               <li>Yetkazib berish</li>
               <li>Service xizmati</li>
             </ul>
-            <button className="max-w-[314px] w-full h-[50px] text-white bg-headerColor rounded-[12px] mt-[50px] ">
+            <a href="https://t.me/Xoliyorov_Asilbek" className="flex items-center cursor-pointer justify-center max-w-[314px] w-full h-[50px] text-white bg-headerColor rounded-[12px] mt-[50px] ">
               Hoziroq xarid qiling
-            </button>
+            </a>
           </div>
         </div>
         <div className="mt-[60px]">

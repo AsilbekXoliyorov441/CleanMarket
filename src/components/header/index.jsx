@@ -8,27 +8,24 @@ const Header = () => {
   const [visible, setVisible] = useState(false);
   const listRef = useRef(null);
   const [catalogChange, setCatalogChange] = useState(false);
-  const [catId , setCatId] = useState(1)
-    const [catTitle, setCatTitle] = useState("Поломоичные Машины");
-    const [searchValue , setSearchValue] = useState("")
-    const [productId , setProductId] = useState(0);
-    const [visibleSearchPanel , setVisibleSearchPanel] = useState(false)
+  const [catId, setCatId] = useState(1);
+  const [catTitle, setCatTitle] = useState("Поломоичные Машины");
+  const [searchValue, setSearchValue] = useState("");
+  const [productId, setProductId] = useState(0);
+  const [visibleSearchPanel, setVisibleSearchPanel] = useState(false);
+  const [promoCode , setPromoCode] = useState(false)
 
-    const search = products
-                .filter((item) =>
-                  item.brandName.toLowerCase().includes(searchValue.toLowerCase())
-                )
+  const search = products.filter((item) =>
+    item.brandName.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
-    console.log(searchValue);
+  console.log(searchValue);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleNavigate = (id) => {
-      navigate(`products/${id}`)
-    }
-
-
-
+  const handleNavigate = (id) => {
+    navigate(`products/${id}`);
+  };
 
   const viloyatlar = [
     "Andijon",
@@ -58,7 +55,8 @@ const Header = () => {
       if (listRef.current && !listRef.current.contains(event.target)) {
         setVisible(false); // `ul`ni yashirish
         setVisibleSearchPanel(false);
-        setSearchValue("")
+        setSearchValue("");
+        setPromoCode(false)
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -67,9 +65,11 @@ const Header = () => {
     };
   }, []);
 
-  const productsFilter = products.filter((product) => product.categoryId === +catId);
+  const productsFilter = products.filter(
+    (product) => product.categoryId === +catId
+  );
   return (
-    <header className="pb-[200px]">
+    <header id="header" className="pb-[200px]">
       <div className="fixed top-0 w-full z-50 header-top bg-headerColor h-[64px] flex items-center">
         <div className="container flex items-center justify-between mx-auto px-5">
           <p className="text-[18px] text-white">
@@ -78,7 +78,7 @@ const Header = () => {
             </span>{" "}
             <span className="inline-block font-bold"> -10% Chegirma</span>
           </p>
-          <button className="w-[140px] h-[36px] rounded-[4px] text-[16px] bg-white text-headerColor">
+          <button onClick={() => setPromoCode(true)} className="w-[140px] h-[36px] rounded-[4px] text-[16px] bg-white text-headerColor">
             Bonusni olish
           </button>
         </div>
@@ -177,7 +177,7 @@ const Header = () => {
             className=" h-[44px] max-w-[149px] md:max-w-[400px] lg:max-w-[549px] w-full md:ml-[18px] overflow-hidden border border-gray-200 rounded-[8px] flex justify-between items-center"
           >
             <input
-            value={searchValue}
+              value={searchValue}
               onChange={(e) => {
                 setSearchValue(e.target.value), setVisibleSearchPanel(true);
               }}
@@ -271,8 +271,12 @@ const Header = () => {
               </h1>
             ))}
           </div>
-          <span className="w-[2px] max-h-[1200px] h-full mx-[20px] bg-gray-300 inline-block"></span>
-          <div className="absolute cursor-pointer sm:static bg-white shadow-2xl md:shadow-none left-[100px] grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
+          <span className="w-[2px] max-h-[500px] h-full mx-[20px] bg-gray-300 inline-block"></span>
+          <div
+            className={`absolute ${
+              productsFilter.length === 0 ? "" : "overflow-y-scroll"
+            } max-h-[500px] cursor-pointer sm:static bg-white shadow-2xl md:shadow-none left-[100px] grid grid-cols-1 lg:grid-cols-2 gap-[30px]`}
+          >
             {productsFilter.length !== 0 ? (
               <>
                 {productsFilter.map((el, index) => (
@@ -305,6 +309,37 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <div className="fixed right-3 flex flex-col gap-[20px] z-[40] top-[50%]">
+        <a
+          className="w-[75px] h-[75px] bg-black shadow-2xl rounded-full flex items-center justify-center"
+          href="https://t.me/Xoliyorov_Asilbek"
+        >
+          <img
+            className="hover:scale-125 animate-pulse shadow-2xl rounded-full mt-[4px] transition-all"
+            src="/home/telegram-share.svg"
+            alt="telegram"
+          />
+        </a>
+        <a
+          className="w-[75px] hover:shadow-2xl h-[75px]  bg-black rounded-full flex items-center justify-center"
+          href="#header"
+        >
+          <img
+            className="mt-[30px]  animate-bounce shadow-2xl w-[20px] h-[45px]"
+            src="/home/backtop.png"
+            alt="backtop"
+          />
+        </a>
+      </div>
+      {promoCode ? 
+       <div className="fixed w-full h-full backdrop-blur-sm flex justify-center items-center flex-col  mx-auto z-[99]">
+        <form ref={listRef} id="bonus" className="flex flex-col gap-[20px] rounded-[10px] bg-white max-w-[600px] w-full px-[20px] py-[50px]">
+          <h1 className="text-center text-[32px] text-mapColor font-bold">Iltimos PromoCode ni kiriting</h1>
+          <input placeholder="PromoCode" className="text-[24px] outline-none hover:shadow-xl text-headerColor pl-[20px] max-w-[500px] mx-auto w-full border-headerColor border-[2px] h-[60px] rounded-[8px]" type="text" required />
+          <button className="max-w-[500px] w-full mx-auto bg-headerColor text-white h-[60px] rounded-[8px] text-[24px]">Send</button>
+        </form>
+      </div> : ""  
+    }
     </header>
   );
 };
