@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { categories } from "../../const/categories";
 import { products } from "../../const/products";
 import { useNavigate } from "react-router-dom";
+import { FavouriteContext } from "../../context/FavouriteContext";
 
 const Header = () => {
   const [location, setLocation] = useState("Toshkent");
@@ -11,9 +12,11 @@ const Header = () => {
   const [catId, setCatId] = useState(1);
   const [catTitle, setCatTitle] = useState("Поломоичные Машины");
   const [searchValue, setSearchValue] = useState("");
-  const [productId, setProductId] = useState(0);
   const [visibleSearchPanel, setVisibleSearchPanel] = useState(false);
   const [promoCode , setPromoCode] = useState(false)
+
+  
+  const {favourite} = useContext(FavouriteContext);
 
   const search = products.filter((item) =>
     item.brandName.toLowerCase().includes(searchValue.toLowerCase())
@@ -68,6 +71,7 @@ const Header = () => {
   const productsFilter = products.filter(
     (product) => product.categoryId === +catId
   );
+
   return (
     <header id="header" className="pb-[200px]">
       <div className="fixed top-0 w-full z-50 header-top bg-headerColor h-[64px] flex items-center">
@@ -244,7 +248,7 @@ const Header = () => {
           >
             <img src="/home/heart.svg" alt="heart" />
             <span className="absolute  bg-headerColor h-[14px] w-[14px] text-[10px] flex items-center justify-center text-white rounded-full top-0 left-4">
-              2
+              {favourite.length}
             </span>
             <span className="hidden sm:inline-block">Sevimlilar</span>
           </a>

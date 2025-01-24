@@ -4,6 +4,8 @@ import { products } from "../const/products";
 
 const ProductPage = () => {
   const [activeTab, setActiveTab] = useState(200);
+  const { addToFavourite, favourite } = useCart();
+
   return (
     <div className="container flex flex-col sm:flex-row gap-[30px] pt-[30px] pb-[60px]">
       <div className="max-w-[263px] mx-auto ">
@@ -35,7 +37,7 @@ const ProductPage = () => {
             </span>
             <img src="/home/categories-icon.png" alt="" />
           </button>
-          {categories.slice(0, 4).map((tab , index) => (
+          {categories.slice(0, 4).map((tab, index) => (
             <button
               className="flex items-center w-full justify-between"
               onClick={() => setActiveTab(tab.id)}
@@ -64,8 +66,11 @@ const ProductPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2  xl:grid-cols-3 gap-[20px]">
           {activeTab === 200 ? (
             <>
-              {products.map((product , i) => (
-                <div key={i} className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]">
+              {products.map((product, i) => (
+                <div
+                  key={i}
+                  className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]"
+                >
                   {product.discount ? (
                     <span className="absolute w-[55%] bg-white rounded-br-[9.65px] font-bold flex items-center justify-center h-[40px]">
                       {product?.discount}%
@@ -89,16 +94,25 @@ const ProductPage = () => {
                     src={product?.image}
                     alt={product.status}
                   />
-                  <a
-                    href="/cart"
+                  <button
+                    onClick={() => addToFavourite(product?.id)}
                     className="absolute cursor-pointer w-[50px] h-[50px] bg-white top-[20px] right-[20px] rounded-[8px] flex items-center justify-center text-headerColor"
                   >
-                    <img
-                      src="/home/heart.svg"
-                      alt="heart"
-                      className="text-headerColor  fill-headerColor"
-                    />
-                  </a>
+                    {favourite.includes(product.id) ? (
+                      <img
+                        src="/public/home/heart-liked.svg"
+                        alt="heart"
+                        width={25}
+                        className="text-headerColor  fill-headerColor"
+                      />
+                    ) : (
+                      <img
+                        src="/home/heart.svg"
+                        alt="heart"
+                        className="text-headerColor  fill-headerColor"
+                      />
+                    )}
+                  </button>
                   <p className="mt-[24px] text-gray-600">
                     {product?.description}
                   </p>
@@ -107,7 +121,10 @@ const ProductPage = () => {
                     {product?.price} сум
                   </h2>
                   <div className="flex items-center justify-between mt-[12px]">
-                    <a href={`products/${product?.id}`} className="w-[75%] mx-auto bg-gray-100 h-[60px] text-[22px] font-bold flex items-center justify-center">
+                    <a
+                      href={`products/${product?.id}`}
+                      className="w-[75%] mx-auto bg-gray-100 h-[60px] text-[22px] font-bold flex items-center justify-center"
+                    >
                       Xarid qilish
                     </a>
                   </div>
@@ -116,54 +133,64 @@ const ProductPage = () => {
             </>
           ) : (
             <>
-              {products.map((product , i) => activeTab === product?.categoryId ? 
-              <div key={i} className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]">
-                  {product.discount ? (
-                    <span className="absolute w-[55%] bg-white rounded-br-[9.65px] font-bold flex items-center justify-center h-[40px]">
-                      {product?.discount}%
-                    </span>
-                  ) : (
-                    <>
-                      {product.status === "Maxsus taklif" ? (
-                        <span className="bg-yellow-400  w-[55%] rounded-br-[9.65px] font-bold flex items-center justify-center h-[40px] absolute">
-                          {product?.status}
-                        </span>
-                      ) : (
-                        <span className="bg-white text-headerColor w-[55%] h-[40px] rounded-br-[9.65px] font-bold flex items-center justify-center absolute">
-                          {product?.status}
-                        </span>
-                      )}
-                    </>
-                  )}
-
-                  <img
-                    className="bg-gray-100 w-full rounded-[9.65px] "
-                    src={product?.image}
-                    alt={product.status}
-                  />
-                  <a
-                    href="/cart"
-                    className="absolute cursor-pointer w-[50px] h-[50px] bg-white top-[20px] right-[20px] rounded-[8px] flex items-center justify-center text-headerColor"
+              {products.map((product, i) =>
+                activeTab === product?.categoryId ? (
+                  <div
+                    key={i}
+                    className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]"
                   >
+                    {product.discount ? (
+                      <span className="absolute w-[55%] bg-white rounded-br-[9.65px] font-bold flex items-center justify-center h-[40px]">
+                        {product?.discount}%
+                      </span>
+                    ) : (
+                      <>
+                        {product.status === "Maxsus taklif" ? (
+                          <span className="bg-yellow-400  w-[55%] rounded-br-[9.65px] font-bold flex items-center justify-center h-[40px] absolute">
+                            {product?.status}
+                          </span>
+                        ) : (
+                          <span className="bg-white text-headerColor w-[55%] h-[40px] rounded-br-[9.65px] font-bold flex items-center justify-center absolute">
+                            {product?.status}
+                          </span>
+                        )}
+                      </>
+                    )}
+
                     <img
-                      src="/home/heart.svg"
-                      alt="heart"
-                      className="text-headerColor  fill-headerColor"
+                      className="bg-gray-100 w-full rounded-[9.65px] "
+                      src={product?.image}
+                      alt={product.status}
                     />
-                  </a>
-                  <p className="mt-[24px] text-gray-600">
-                    {product?.description}
-                  </p>
-                  <p className="mb-[12px]">{product?.brandName}</p>
-                  <h2 className="font-bold text-[20px]">
-                    {product?.price} сум
-                  </h2>
-                  <div className="flex items-center justify-between mt-[12px]">
-                    <a href={`products/${product.id}`} className="w-[75%] mx-auto bg-gray-100 h-[60px] text-[22px] font-bold flex items-center justify-center">
-                      Xarid qilish
+                    <a
+                      href="/cart"
+                      className="absolute cursor-pointer w-[50px] h-[50px] bg-white top-[20px] right-[20px] rounded-[8px] flex items-center justify-center text-headerColor"
+                    >
+                      <img
+                        src="/home/heart.svg"
+                        alt="heart"
+                        className="text-headerColor  fill-headerColor"
+                      />
                     </a>
+                    <p className="mt-[24px] text-gray-600">
+                      {product?.description}
+                    </p>
+                    <p className="mb-[12px]">{product?.brandName}</p>
+                    <h2 className="font-bold text-[20px]">
+                      {product?.price} сум
+                    </h2>
+                    <div className="flex items-center justify-between mt-[12px]">
+                      <a
+                        href={`products/${product.id}`}
+                        className="w-[75%] mx-auto bg-gray-100 h-[60px] text-[22px] font-bold flex items-center justify-center"
+                      >
+                        Xarid qilish
+                      </a>
+                    </div>
                   </div>
-                </div> : ""
+                ) : (
+                  ""
+                )
               )}
             </>
           )}

@@ -11,19 +11,19 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="categories" element={<CategoriesPage />} />
-          <Route path="products" element={<ProductsPage />} />
-          <Route path="products/:id" element={<CartPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="news" element={<NewsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="categories" element={<CategoriesPage />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="products/:id" element={<CartPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="news" element={<NewsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,9 +10,11 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { products } from "../const/products";
 import { categories } from "../const/categories";
+import { FavouriteContext } from "../context/FavouriteContext";
 
 const HomePage = () => {
-  const [badge , setBadge] = useState(0);
+  const { favourite , addToFavourite } = useContext(FavouriteContext);
+
   return (
     <>
       <section id="hero" className="pb-[60px]">
@@ -132,7 +134,7 @@ const HomePage = () => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {products.slice(0, 12).map((product , index) => (
+            {products.slice(0, 12).map((product, index) => (
               <SwiperSlide key={index}>
                 <div className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]">
                   {product.discount ? (
@@ -159,13 +161,23 @@ const HomePage = () => {
                     alt={product.status}
                   />
                   <button
+                    onClick={() => addToFavourite(product?.id)}
                     className="absolute cursor-pointer w-[50px] h-[50px] bg-white top-[20px] right-[20px] rounded-[8px] flex items-center justify-center text-headerColor"
                   >
-                    <img
-                      src="/home/heart.svg"
-                      alt="heart"
-                      className="text-headerColor  fill-headerColor"
-                    />
+                    {favourite.includes(product.id) ? (
+                      <img
+                        src="/public/home/heart-liked.svg"
+                        alt="heart"
+                        width={25}
+                        className="text-headerColor   fill-headerColor"
+                      />
+                    ) : (
+                      <img
+                        src="/home/heart.svg"
+                        alt="heart"
+                        className="text-headerColor  fill-headerColor"
+                      />
+                    )}
                   </button>
                   <p className="mt-[24px] text-gray-600">
                     {product?.description}
@@ -213,7 +225,7 @@ const HomePage = () => {
             modules={[Navigation]}
             className="mySwiper mt-[98px]"
           >
-            {products.slice(12, 24).map((product , index) => (
+            {products.slice(12, 24).map((product, index) => (
               <SwiperSlide key={index}>
                 <div className="max-w-[350px] mx-auto border border-gray-100 rounded-[14px] relative px-[14px] py-[14px]">
                   {product.discount ? (
@@ -240,13 +252,23 @@ const HomePage = () => {
                     alt={product.status}
                   />
                   <button
+                    onClick={() => addToFavourite(product?.id)}
                     className="absolute cursor-pointer w-[50px] h-[50px] bg-white top-[20px] right-[20px] rounded-[8px] flex items-center justify-center text-headerColor"
                   >
-                    <img
-                      src="/home/heart.svg"
-                      alt="heart"
-                      className="text-headerColor  fill-headerColor"
-                    />
+                    {favourite.includes(product.id) ? (
+                      <img
+                        src="/public/home/heart-liked.svg"
+                        alt="heart"
+                        width={25}
+                        className="text-headerColor  fill-headerColor"
+                      />
+                    ) : (
+                      <img
+                        src="/home/heart.svg"
+                        alt="heart"
+                        className="text-headerColor  fill-headerColor"
+                      />
+                    )}
                   </button>
                   <p className="mt-[24px] text-gray-600">
                     {product?.description}
@@ -305,10 +327,8 @@ const HomePage = () => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {categories.slice(0, 6).map((category , index) => (
-              <SwiperSlide
-              key={index}
-              >
+            {categories.slice(0, 6).map((category, index) => (
+              <SwiperSlide key={index}>
                 <div className="max-w-[350px] h-[350px] mx-auto border border-gray-100 rounded-[24px] relative overflow-hidden">
                   <span className="absolute w-[202px] text-[20px] top-[24px] left-[24px]">
                     {category?.title}
@@ -471,11 +491,7 @@ const HomePage = () => {
                   Actual new
                 </span>
                 <span className="flex gap-1 items-center">
-                  <img
-                    className="w-[22px]"
-                    src="/home/views.svg"
-                    alt="views"
-                  />
+                  <img className="w-[22px]" src="/home/views.svg" alt="views" />
                   16.5k views
                 </span>
                 <span className="flex gap-1 items-center">
@@ -507,11 +523,7 @@ const HomePage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 justify-center lg:flex sm:justify-between items-center gap-[20px] flex-wrap lg:flex-nowrap">
             <div className="max-w-[350px] mx-auto f-full border border-gray-100 rounded-[16px] p-[14px] hover:shadow">
-              <img
-                className="mb-[24px]"
-                src="/home/news-1.png"
-                alt="news-1"
-              />
+              <img className="mb-[24px]" src="/home/news-1.png" alt="news-1" />
               <h1 className="text-[18px] font-[600] mb-[24px]">
                 What should be the arrangement of furniture in the bathroom?
               </h1>
@@ -524,11 +536,7 @@ const HomePage = () => {
               </a>
             </div>
             <div className="max-w-[350px] mx-auto f-full border border-gray-100 rounded-[16px] p-[14px] hover:shadow">
-              <img
-                className="mb-[24px]"
-                src="/home/news-2.png"
-                alt="news-1"
-              />
+              <img className="mb-[24px]" src="/home/news-2.png" alt="news-1" />
               <h1 className="text-[18px] font-[600] mb-[24px]">
                 What should be the arrangement of furniture in the bathroom?
               </h1>
@@ -541,11 +549,7 @@ const HomePage = () => {
               </a>
             </div>
             <div className="max-w-[350px] mx-auto f-full border border-gray-100 rounded-[16px] p-[14px] hover:shadow">
-              <img
-                className="mb-[24px]"
-                src="/home/news-3.png"
-                alt="news-1"
-              />
+              <img className="mb-[24px]" src="/home/news-3.png" alt="news-1" />
               <h1 className="text-[18px] font-[600] mb-[24px]">
                 What should be the arrangement of furniture in the bathroom?
               </h1>
@@ -558,11 +562,7 @@ const HomePage = () => {
               </a>
             </div>
             <div className="max-w-[350px] mx-auto f-full border border-gray-100 rounded-[16px] p-[14px] hover:shadow">
-              <img
-                className="mb-[24px]"
-                src="/home/news-4.png"
-                alt="news-1"
-              />
+              <img className="mb-[24px]" src="/home/news-4.png" alt="news-1" />
               <h1 className="text-[18px] font-[600] mb-[24px]">
                 What should be the arrangement of furniture in the bathroom?
               </h1>
